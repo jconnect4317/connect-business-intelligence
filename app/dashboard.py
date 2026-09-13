@@ -36,6 +36,30 @@ monthly = monthly_kpis(conn)
 fig = px.line(monthly, x="month", y="revenue", markers=True, title="Monthly revenue")
 st.plotly_chart(fig, use_container_width=True)
 
+st.subheader("Executive insights")
+
+anomalies = detect_anomalies(conn)
+forecast = forecast_next_7_days(conn)
+
+if not monthly.empty:
+    best_month = monthly.loc[monthly["revenue"].idxmax()]
+    latest_month = monthly.iloc[-1]
+
+    total_anomalies = int(anomalies["anomaly"].sum())
+    forecast_total = float(forecast["forecast_revenue"].sum())
+
+    st.info(
+        f"**Business summary**\n\n"
+        f"- Revenue peaked at **${best_month['revenue']:,.0f}** in "
+        f"**{best_month['month']}**.\n\n"
+        f"- The latest reporting month generated **${latest_month['revenue']:,.0f}** "
+        f"across **{int(latest_month['orders']):,} orders**.\n\n"
+        f"- The anomaly detection model identified **{total_anomalies}** "
+        f"unusual daily revenue observations.\n\n"
+        f"- Forecasted revenue for the next 7 days is approximately "
+        f"**${forecast_total:,.0f}**."
+    )
+
 left, right = st.columns(2)
 with left:
     st.subheader("Top products")
