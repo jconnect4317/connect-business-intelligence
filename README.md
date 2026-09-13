@@ -1,79 +1,115 @@
 # conn.ect Business Intelligence
 
-Automated business intelligence, data automation, and machine learning system built from scratch.
-
-## What this project demonstrates
-
-- Synthetic data generation for a realistic e-commerce business
-- Python data ingestion and cleaning
-- SQL analytics using SQLite
-- Automated KPI calculations
-- Machine-learning based anomaly detection
-- Seven-day revenue forecasting
-- Interactive Streamlit dashboard
-- Automated tests with pytest
-- Reproducible local execution with Docker
-- CI checks with GitHub Actions
+An end-to-end business intelligence and data automation portfolio project built around a realistic synthetic e-commerce business.
 
 ## Business problem
 
-A growing business has operational data spread across recurring files. Manual reporting creates delays, makes data quality harder to control, and can hide important changes in revenue or inventory.
+Growing businesses often accumulate operational data across recurring files and systems. Manual reporting makes data preparation slow, inconsistent, and reactive.
 
-This project demonstrates a self-contained system that turns raw business data into an analytical database, business metrics, automated signals, forecasts, and a decision-ready dashboard.
+This project demonstrates a local-first solution that turns raw business data into a reusable analytical workflow with automated insights, anomaly detection, revenue forecasting, and inventory risk signals.
+
+## What it demonstrates
+
+- Synthetic data generation for customers, products, orders, and inventory
+- Data validation, cleaning, and transformation with Python and pandas
+- Analytical storage and SQL querying with SQLite
+- Business KPI calculations
+- Month-over-month revenue analysis
+- Machine-learning anomaly detection with Isolation Forest
+- Seven-day revenue forecasting with a Random Forest model
+- Chronological train/test evaluation with MAE, RMSE, and R²
+- Interactive Streamlit dashboard for decision support
+- Automated tests with pytest
+- Dockerized local execution
+- GitHub Actions CI
 
 ## Architecture
 
-See [docs/architecture.md](docs/architecture.md).
+```text
+Synthetic Business Data
+          |
+          v
+  Ingestion + Validation
+          |
+          v
+ Cleaning + Transformation
+          |
+          v
+      SQLite DB
+       /     \
+      /       \
+ Analytics     ML
+   /   |      / \
+ KPIs Products Anomaly Detection
+      |          \
+      |       Revenue Forecast
+       \         /
+        \       /
+       Streamlit Dashboard
+```
+
+See [docs/architecture.md](docs/architecture.md) for more detail.
 
 ## Local setup
 
-### 1. Create an environment
+### 1. Create and activate a virtual environment
 
 ```bash
 python -m venv .venv
 ```
 
-Activate the environment, then install dependencies:
+Windows PowerShell:
+
+```powershell
+.venv\Scripts\Activate.ps1
+```
+
+Windows Command Prompt:
+
+```cmd
+.venv\Scripts\activate
+```
+
+### 2. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-### 2. Run the pipeline
+### 3. Run the end-to-end pipeline
 
 ```bash
 python src/main.py
 ```
 
-This generates synthetic raw data, cleans and loads the data into SQLite, and trains the forecasting model.
+This generates synthetic data when needed, validates/cleans the raw data, loads SQLite, and trains the forecasting model.
 
-### 3. Launch the dashboard
+### 4. Launch the dashboard
 
 ```bash
 streamlit run app/dashboard.py
 ```
 
-Open the local Streamlit address shown in your terminal.
-
-### 4. Run tests
+### 5. Run tests
 
 ```bash
 pytest -q
-```
-
-## Project structure
-
-```text
-src/             pipeline, analytics, and ML code
-app/             Streamlit dashboard
-tests/            automated tests
-data/             raw/processed data and local SQLite database
-models/           trained model artifacts
-docs/             architecture documentation
 ```
 
 ## Portfolio notes
 
 This is an independently created portfolio project using synthetic data. It is not based on confidential employer data, code, systems, or workflows.
 
-Business impact statements in this repository describe potential production value unless a measured result is explicitly shown.
+No paid cloud services are required. The project is designed to run locally on a laptop and uses free/open-source Python tooling.
+
+Any stated business impact should be interpreted as a potential production benefit unless a measured result is explicitly reported.
+
+## What a production version could add
+
+- Cloud object storage and managed orchestration
+- Role-based access control
+- Incremental data loading
+- Data quality monitoring and alerts
+- Model registry and experiment tracking
+- CI/CD deployment
+- Real client data integrations
