@@ -10,3 +10,4 @@ data/raw/*.csv
 data/processed/*.csv
 data/business.db
 models/*.joblib
+data/*.db
